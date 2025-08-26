@@ -6,8 +6,8 @@ const { createBookRateLimiter } = require('../middlewares/rateLimiter');
 const { authMiddleware } = require('../middlewares/basicAuth');
 
 router.post('/', authMiddleware, createBookRateLimiter, validateBook, booksController.createBook);
-router.put('/:id', validateBookUpdate, booksController.updateBook);
-router.delete('/:id', booksController.deleteBook);
+router.put('/:id', authMiddleware, validateBookUpdate, booksController.updateBook);
+router.delete('/:id', authMiddleware, booksController.deleteBook);
 router.get('/', booksController.getAllBooks);
 router.get('/search', validateBookSearch, booksController.searchBooks);
 

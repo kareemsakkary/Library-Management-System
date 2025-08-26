@@ -1,399 +1,561 @@
 {
-    "info": {
-      "_postman_id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-      "name": "Library Management System API",
-      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-      "description": "Postman Collection for the Library Management System RESTful API"
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "name": "Library Management System API (Collection Auth)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Updated Postman Collection for the Library Management System RESTful API, with Basic Auth applied at the collection level.",
+    "auth": {
+      "type": "basic",
+      "basic": [
+        {
+          "key": "username",
+          "value": "admin"
+        },
+        {
+          "key": "password",
+          "value": "supersecret"
+        }
+      ]
+    }
+  },
+  "item": [
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "Create Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"The Great Gatsby\",\n    \"author\": \"F. Scott Fitzgerald\",\n    \"isbn\": \"978-0743273565\",\n    \"available_quantity\": 10,\n    \"shelf_location\": \"A-201\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/books",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "books"
+              ]
+            },
+            "description": "Adds a new book to the library."
+          },
+          "response": []
+        },
+        {
+          "name": "List All Books",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/books",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "books"
+              ]
+            },
+            "description": "Retrieves a list of all books in the library."
+          },
+          "response": []
+        },
+        {
+          "name": "Search Books",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/books/search?query=Gatsby",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "books",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "Gatsby"
+                }
+              ]
+            },
+            "description": "Searches for books by title, author, or ISBN."
+          },
+          "response": []
+        },
+        {
+          "name": "Update Book",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"The Great Gatsby (Revised)\",\n    \"available_quantity\": 8\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/books/{{book_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "books",
+                "{{book_id}}"
+              ]
+            },
+            "description": "Updates the details of an existing book."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Book",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/books/{{book_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "books",
+                "{{book_id}}"
+              ]
+            },
+            "description": "Deletes a book from the library by ID."
+          },
+          "response": []
+        }
+      ]
     },
-    "item": [
-      {
-        "name": "Books",
-        "item": [
-          {
-            "name": "Create Book",
-            "request": {
-              "method": "POST",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
+    {
+      "name": "Borrowers",
+      "item": [
+        {
+          "name": "Register Borrower",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Alice Smith\",\n    \"email\": \"alice.smith@example.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/borrowers",
+              "host": [
+                "{{base_url}}"
               ],
-              "body": {
-                "mode": "raw",
-                "raw": "{\n    \"title\": \"The Great Gatsby\",\n    \"author\": \"F. Scott Fitzgerald\",\n    \"isbn\": \"978-0743273565\",\n    \"available_quantity\": 10,\n    \"shelf_location\": \"A-201\"\n}"
-              },
-              "url": {
-                "raw": "{{base_url}}/api/books",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "books"
-                ]
-              },
-              "description": "Adds a new book to the library."
+              "path": [
+                "api",
+                "borrowers"
+              ]
             },
-            "response": []
+            "description": "Registers a new borrower."
           },
-          {
-            "name": "List All Books",
-            "request": {
-              "method": "GET",
-              "header": [],
-              "url": {
-                "raw": "{{base_url}}/api/books",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "books"
-                ]
-              },
-              "description": "Retrieves a list of all books in the library."
-            },
-            "response": []
-          },
-          {
-            "name": "Search Books",
-            "request": {
-              "method": "GET",
-              "header": [],
-              "url": {
-                "raw": "{{base_url}}/api/books/search?query=Gatsby",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "books",
-                  "search"
-                ],
-                "query": [
-                  {
-                    "key": "query",
-                    "value": "Gatsby"
-                  }
-                ]
-              },
-              "description": "Searches for books by title, author, or ISBN."
-            },
-            "response": []
-          },
-          {
-            "name": "Update Book",
-            "request": {
-              "method": "PUT",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
+          "response": []
+        },
+        {
+          "name": "List All Borrowers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/borrowers",
+              "host": [
+                "{{base_url}}"
               ],
-              "body": {
-                "mode": "raw",
-                "raw": "{\n    \"title\": \"The Great Gatsby (Revised)\",\n    \"available_quantity\": 8\n}"
-              },
-              "url": {
-                "raw": "{{base_url}}/api/books/{{book_id}}",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "books",
-                  "{{book_id}}"
-                ]
-              },
-              "description": "Updates the details of an existing book."
+              "path": [
+                "api",
+                "borrowers"
+              ]
             },
-            "response": []
+            "description": "Retrieves a list of all registered borrowers."
           },
-          {
-            "name": "Delete Book",
-            "request": {
-              "method": "DELETE",
-              "header": [],
-              "url": {
-                "raw": "{{base_url}}/api/books/{{book_id}}",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "books",
-                  "{{book_id}}"
-                ]
-              },
-              "description": "Deletes a book from the library by ID."
+          "response": []
+        },
+        {
+          "name": "Update Borrower",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Alice J. Smith\",\n    \"email\": \"alice.j.smith@example.com\"\n}"
             },
-            "response": []
-          }
-        ]
-      },
-      {
-        "name": "Borrowers",
-        "item": [
-          {
-            "name": "Register Borrower",
-            "request": {
-              "method": "POST",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
+            "url": {
+              "raw": "{{base_url}}/api/borrowers/{{borrower_id}}",
+              "host": [
+                "{{base_url}}"
               ],
-              "body": {
-                "mode": "raw",
-                "raw": "{\n    \"name\": \"Alice Smith\",\n    \"email\": \"alice.smith@example.com\"\n}"
-              },
-              "url": {
-                "raw": "{{base_url}}/api/borrowers",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "borrowers"
-                ]
-              },
-              "description": "Registers a new borrower."
+              "path": [
+                "api",
+                "borrowers",
+                "{{borrower_id}}"
+              ]
             },
-            "response": []
+            "description": "Updates the details of an existing borrower."
           },
-          {
-            "name": "List All Borrowers",
-            "request": {
-              "method": "GET",
-              "header": [],
-              "url": {
-                "raw": "{{base_url}}/api/borrowers",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "borrowers"
-                ]
-              },
-              "description": "Retrieves a list of all registered borrowers."
-            },
-            "response": []
-          },
-          {
-            "name": "Update Borrower",
-            "request": {
-              "method": "PUT",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
+          "response": []
+        },
+        {
+          "name": "Delete Borrower",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/borrowers/{{borrower_id}}",
+              "host": [
+                "{{base_url}}"
               ],
-              "body": {
-                "mode": "raw",
-                "raw": "{\n    \"name\": \"Alice J. Smith\",\n    \"email\": \"alice.j.smith@example.com\"\n}"
-              },
-              "url": {
-                "raw": "{{base_url}}/api/borrowers/{{borrower_id}}",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "borrowers",
-                  "{{borrower_id}}"
-                ]
-              },
-              "description": "Updates the details of an existing borrower."
+              "path": [
+                "api",
+                "borrowers",
+                "{{borrower_id}}"
+              ]
             },
-            "response": []
+            "description": "Deletes a borrower by ID."
           },
-          {
-            "name": "Delete Borrower",
-            "request": {
-              "method": "DELETE",
-              "header": [],
-              "url": {
-                "raw": "{{base_url}}/api/borrowers/{{borrower_id}}",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "borrowers",
-                  "{{borrower_id}}"
-                ]
-              },
-              "description": "Deletes a borrower by ID."
-            },
-            "response": []
-          }
-        ]
-      },
-      {
-        "name": "Borrowing Process",
-        "item": [
-          {
-            "name": "Checkout Book",
-            "request": {
-              "method": "POST",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": {
-                "mode": "raw",
-                "raw": "{\n    \"book_id\": {{book_id}},\n    \"borrower_id\": {{borrower_id}},\n    \"due_date\": \"2024-07-30\"\n}"
-              },
-              "url": {
-                "raw": "{{base_url}}/api/borrowing/checkout",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "borrowing",
-                  "checkout"
-                ]
-              },
-              "description": "Allows a borrower to check out a book."
-            },
-            "response": []
-          },
-          {
-            "name": "Return Book",
-            "request": {
-              "method": "PUT",
-              "header": [],
-              "url": {
-                "raw": "{{base_url}}/api/borrowing/return/{{borrow_record_id}}",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "borrowing",
-                  "return",
-                  "{{borrow_record_id}}"
-                ]
-              },
-              "description": "Allows a borrower to return a book."
-            },
-            "response": []
-          },
-          {
-            "name": "List Borrowed Books by Borrower",
-            "request": {
-              "method": "GET",
-              "header": [],
-              "url": {
-                "raw": "{{base_url}}/api/borrowing/borrower/{{borrower_id}}",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "borrowing",
-                  "borrower",
-                  "{{borrower_id}}"
-                ]
-              },
-              "description": "Lists all books currently borrowed by a specific borrower."
-            },
-            "response": []
-          },
-          {
-            "name": "List Overdue Books",
-            "request": {
-              "method": "GET",
-              "header": [],
-              "url": {
-                "raw": "{{base_url}}/api/borrowing/overdue",
-                "host": [
-                  "{{base_url}}"
-                ],
-                "path": [
-                  "api",
-                  "borrowing",
-                  "overdue"
-                ]
-              },
-              "description": "Lists all books that are currently overdue."
-            },
-            "response": []
-          }
-        ]
-      }
-    ],
-    "event": [
-      {
-        "listen": "prerequest",
-        "script": {
-          "type": "text/javascript",
-          "exec": [
-            ""
-          ]
+          "response": []
         }
-      },
-      {
-        "listen": "test",
-        "script": {
-          "type": "text/javascript",
-          "exec": [
-            "// Example for automatically setting environment variables after creating a book or borrower",
-            "var jsonData;",
-            "try {",
-            "    jsonData = pm.response.json();",
-            "} catch (e) {",
-            "    console.error('Error parsing JSON response:', e);",
-            "}",
-            "",
-            "if (pm.request.url.includes('/api/books') && pm.request.method === 'POST' && jsonData && jsonData.id) {",
-            "    pm.environment.set(\"book_id\", jsonData.id);",
-            "    console.log('Book ID set to:', jsonData.id);",
-            "}",
-            "if (pm.request.url.includes('/api/borrowers') && pm.request.method === 'POST' && jsonData && jsonData.id) {",
-            "    pm.environment.set(\"borrower_id\", jsonData.id);",
-            "    console.log('Borrower ID set to:', jsonData.id);",
-            "}",
-            "if (pm.request.url.includes('/api/borrowing/checkout') && pm.request.method === 'POST' && jsonData && jsonData.id) {",
-            "    pm.environment.set(\"borrow_record_id\", jsonData.id);",
-            "    console.log('Borrow Record ID set to:', jsonData.id);",
-            "}"
-          ]
+      ]
+    },
+    {
+      "name": "Borrowing Process",
+      "item": [
+        {
+          "name": "Checkout Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"book_id\": {{book_id}},\n    \"borrower_id\": {{borrower_id}},\n    \"due_date\": \"2024-07-30\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/borrowing/checkout",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "borrowing",
+                "checkout"
+              ]
+            },
+            "description": "Allows a borrower to check out a book."
+          },
+          "response": []
+        },
+        {
+          "name": "Return Book",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/borrowing/return/{{borrow_record_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "borrowing",
+                "return",
+                "{{borrow_record_id}}"
+              ]
+            },
+            "description": "Allows a borrower to return a book."
+          },
+          "response": []
+        },
+        {
+          "name": "List Borrowed Books by Borrower",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/borrowing/borrower/{{borrower_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "borrowing",
+                "borrower",
+                "{{borrower_id}}"
+              ]
+            },
+            "description": "Lists all books currently borrowed by a specific borrower."
+          },
+          "response": []
+        },
+        {
+          "name": "List Overdue Books",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/borrowing/overdue",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "borrowing",
+                "overdue"
+              ]
+            },
+            "description": "Lists all books that are currently overdue."
+          },
+          "response": []
         }
+      ]
+    },
+    {
+      "name": "Reporting",
+      "item": [
+        {
+          "name": "Overdue Borrows Last Month (JSON)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reports/overdue-last-month",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "overdue-last-month"
+              ]
+            },
+            "description": "Exports all overdue borrows from the last month in JSON format."
+          },
+          "response": []
+        },
+        {
+          "name": "Overdue Borrows Last Month (CSV)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reports/overdue-last-month?format=csv",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "overdue-last-month"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "csv"
+                }
+              ]
+            },
+            "description": "Exports all overdue borrows from the last month in CSV format."
+          },
+          "response": []
+        },
+        {
+          "name": "Overdue Borrows Last Month (XLSX)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reports/overdue-last-month?format=xlsx",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "overdue-last-month"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "xlsx"
+                }
+              ]
+            },
+            "description": "Exports all overdue borrows from the last month in XLSX format."
+          },
+          "response": []
+        },
+        {
+          "name": "All Borrows Last Month (JSON)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reports/all-borrows-last-month",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "all-borrows-last-month"
+              ]
+            },
+            "description": "Exports all borrowing processes from the last month in JSON format."
+          },
+          "response": []
+        },
+        {
+          "name": "All Borrows Last Month (CSV)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reports/all-borrows-last-month?format=csv",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "all-borrows-last-month"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "csv"
+                }
+              ]
+            },
+            "description": "Exports all borrowing processes from the last month in CSV format."
+          },
+          "response": []
+        },
+        {
+          "name": "All Borrows Last Month (XLSX)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reports/all-borrows-last-month?format=xlsx",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reports",
+                "all-borrows-last-month"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "xlsx"
+                }
+              ]
+            },
+            "description": "Exports all borrowing processes from the last month in XLSX format."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
       }
-    ],
-    "variable": [
-      {
-        "key": "base_url",
-        "value": "http://localhost:3000",
-        "type": "string",
-        "description": "The base URL for your API"
-      },
-      {
-        "key": "book_id",
-        "value": "1",
-        "type": "string",
-        "description": "ID of a sample book (update after creating a book)"
-      },
-      {
-        "key": "borrower_id",
-        "value": "1",
-        "type": "string",
-        "description": "ID of a sample borrower (update after creating a borrower)"
-      },
-      {
-        "key": "borrow_record_id",
-        "value": "1",
-        "type": "string",
-        "description": "ID of a sample borrow record (update after checking out a book)"
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Example for automatically setting environment variables after creating a book or borrower",
+          "var jsonData;",
+          "try {",
+          "    jsonData = pm.response.json();",
+          "} catch (e) {",
+          "    console.error('Error parsing JSON response:', e);",
+          "}",
+          "",
+          "if (pm.request.url.includes('/api/books') && pm.request.method === 'POST' && jsonData && jsonData.id) {",
+          "    pm.environment.set(\"book_id\", jsonData.id);",
+          "    console.log('Book ID set to:', jsonData.id);",
+          "}",
+          "if (pm.request.url.includes('/api/borrowers') && pm.request.method === 'POST' && jsonData && jsonData.id) {",
+          "    pm.environment.set(\"borrower_id\", jsonData.id);",
+          "    console.log('Borrower ID set to:', jsonData.id);",
+          "}",
+          "if (pm.request.url.includes('/api/borrowing/checkout') && pm.request.method === 'POST' && jsonData && jsonData.id) {",
+          "    pm.environment.set(\"borrow_record_id\", jsonData.id);",
+          "    console.log('Borrow Record ID set to:', jsonData.id);",
+          "}"
+        ]
       }
-    ]
-  }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string",
+      "description": "The base URL for your API"
+    },
+    {
+      "key": "book_id",
+      "value": "1",
+      "type": "string",
+      "description": "ID of a sample book (update after creating a book)"
+    },
+    {
+      "key": "borrower_id",
+      "value": "1",
+      "type": "string",
+      "description": "ID of a sample borrower (update after creating a borrower)"
+    },
+    {
+      "key": "borrow_record_id",
+      "value": "1",
+      "type": "string",
+      "description": "ID of a sample borrow record (update after checking out a book)"
+    }
+  ]
+}

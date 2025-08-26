@@ -215,8 +215,10 @@ All endpoints are prefixed with `http://localhost:3000/api`.
 *   **`GET /`** - **List all books**
 *   **`GET /search?query={search_term}`** - **Search for books** by title, author, or ISBN.
 *   **`PUT /:id`** - **Update a book's details**
+    *   **Requires:** Basic Authentication (`admin:supersecret`), Input Validation.
     *   **Body:** `{ "title": "...", "author": "...", "isbn": "...", "available_quantity": ..., "shelf_location": "..." }` (all fields optional for update)
 *   **`DELETE /:id`** - **Delete a book**
+    *   **Requires:** Basic Authentication (`admin:supersecret`).
 
 ---
 
@@ -227,16 +229,20 @@ All endpoints are prefixed with `http://localhost:3000/api`.
     *   **Body:** `{ "name": "...", "email": "..." }`
 *   **`GET /`** - **List all borrowers**
 *   **`PUT /:id`** - **Update a borrower's details**
+    *   **Requires:** Basic Authentication (`admin:supersecret`), Input Validation.
     *   **Body:** `{ "name": "...", "email": "..." }` (both fields optional for update)
 *   **`DELETE /:id`** - **Delete a borrower**
+    *   **Requires:** Basic Authentication (`admin:supersecret`).
 
 ---
 
 ### Borrowing Process Endpoints (`/api/borrowing`)
 
 *   **`POST /checkout`** - **Check out a book**
+    *   **Requires:** Basic Authentication (`admin:supersecret`).
     *   **Body:** `{ "book_id": ..., "borrower_id": ..., "due_date": "YYYY-MM-DD" }`
 *   **`PUT /return/:id`** - **Return a book** (where `:id` is the `borrow_record_id`)
+    *   **Requires:** Basic Authentication (`admin:supersecret`).
 *   **`GET /borrower/:borrower_id`** - **List books currently borrowed** by a specific borrower.
 *   **`GET /overdue`** - **List all overdue books**.
 
@@ -245,9 +251,11 @@ All endpoints are prefixed with `http://localhost:3000/api`.
 ### Reporting Endpoints (`/api/reports`)
 
 *   **`GET /overdue-last-month?format={json|csv|xlsx}`** - **Exports all overdue borrows** from the last month.
+    *   **Requires:** Basic Authentication (`admin:supersecret`).
     *   Default format is `json`.
     *   Example for CSV: `/api/reports/overdue-last-month?format=csv`
 *   **`GET /all-borrows-last-month?format={json|csv|xlsx}`** - **Exports all borrowing processes** from the last month.
+    *   **Requires:** Basic Authentication (`admin:supersecret`).
     *   Default format is `json`.
     *   Example for XLSX: `/api/reports/all-borrows-last-month?format=xlsx`
 
@@ -270,7 +278,7 @@ A Postman Collection JSON file containing all the above endpoints and example re
     *   Create a new environment (e.g., "Library Local").
     *   Add a variable `base_url` with value `http://localhost:3000`.
     *   The collection includes a "Tests" script that attempts to automatically set `book_id`, `borrower_id`, and `borrow_record_id` after successful `POST` requests. You may need to manually update these if automation fails or for specific scenarios.
-3.  **Basic Authentication:** For `POST /api/books` and `POST /api/borrowers`, go to the "Authorization" tab in Postman, select "Basic Auth", and enter Username: `admin`, Password: `supersecret`.
+3.  **Collection-Level Basic Authentication:** Basic Authentication (`admin:supersecret`) is now configured at the collection level. All requests within the collection will automatically inherit these credentials. You do not need to set it for individual requests.
 
 ---
 

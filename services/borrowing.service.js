@@ -1,10 +1,20 @@
 const db = require('../db');
+const { CustomError } = require('../utils/CustomError');
 
 exports.checkoutBook = async (book_id, borrower_id, due_date) => {
   // Check if book is available
   const bookResult = await db.query('SELECT available_quantity FROM books WHERE id = $1;', [book_id]);
-  if (bookResult.rows.length === 0 || bookResult.rows[0].available_quantity === 0) {
-    throw new Error('Book not available or does not exist.');
+  if (bookResult.rows.length === 0) {
+    throw new CustomError('Book not found', 404);
+  }
+  if (bookResult.rows[0].available_quantity === 0) {
+    throw new CustomError('Book is not available for checkout', 400);
+  }
+
+  // Check if borrower exists
+  const borrowerResult = await db.query('SELECT id FROM borrowers WHERE id = $1;', [borrower_id]);
+  if (borrowerResult.rows.length === 0) {
+    throw new CustomError('Borrower not found', 404);
   }
 
   // Create borrow record
@@ -23,10 +33,10 @@ exports.returnBook = async (record_id) => {
   // Get borrow record
   const recordResult = await db.query('SELECT book_id, return_date FROM borrow_records WHERE id = $1;', [record_id]);
   if (recordResult.rows.length === 0) {
-    throw new Error('Borrow record not found.');
+    throw new CustomError('Borrow record not found', 404);
   }
   if (recordResult.rows[0].return_date !== null) {
-    throw new Error('Book already returned.');
+    throw new CustomError('Book already returned', 400);
   }
 
   const book_id = recordResult.rows[0].book_id;

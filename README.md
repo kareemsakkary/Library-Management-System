@@ -1,6 +1,6 @@
 # Library Management System API
 
-![Database Schema Design](Screenshot 2025-08-28 at 7.14.39 PM.png)
+![Database Schema Design](https://github.com/kareemsakkary/Library-Management-System/Screenshot.png)
 
 ## Project Overview
 

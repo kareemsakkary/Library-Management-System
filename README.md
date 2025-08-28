@@ -1,6 +1,6 @@
 # Library Management System API
 
-![Database Schema Design](https://github.com/kareemsakkary/Library-Management-System/Screenshot.png)
+![Database Schema Design]([https://github.com/kareemsakkary/Library-Management-System/Screenshot.png](https://github.com/kareemsakkary/Library-Management-System/blob/main/Screenshot.png))
 
 ## Project Overview
 

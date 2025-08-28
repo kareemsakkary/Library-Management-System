@@ -1,5 +1,7 @@
 # Library Management System API
 
+![Database Schema Design](Screenshot 2025-08-28 at 7.14.39 PM.png)
+
 ## Project Overview
 
 This is a RESTful API for a Library Management System built with Node.js and Express.js, using PostgreSQL as the database. It provides functionalities for managing books, borrowers, and the borrowing process, along with several non-functional requirements and bonus features.
